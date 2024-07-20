@@ -20,12 +20,11 @@ body {
     padding: 10px;
     cursor: pointer;
   }
-  .container-principal{
-    
-  }
+
   #produtos-container {
     margin: 20px;
     max-width: 300px;
+    flex-direction: column;
   }
   
   .produto {

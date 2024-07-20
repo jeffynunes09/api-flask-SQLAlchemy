@@ -98,3 +98,4 @@ test-results/
 
 # Pyre type checker
 .pyre/
+/node_modules
