@@ -4,12 +4,13 @@ from routes.produto_routes import produto_bp
 from routes.categoria_routes import categoria_bp
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 load_dotenv()
 
 
 
 app = Flask(__name__)
-
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 # Configurações do banco de dados usando PyMySQL como driver
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -21,7 +22,7 @@ app.register_blueprint(produto_bp)
 app.register_blueprint(categoria_bp)
 
 # Rota de teste
-@app.route('/')
+@app.route('/api')
 def home():
     return "Hello, Flask with MySQL!"
 
