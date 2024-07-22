@@ -1,33 +1,46 @@
 from flask import Flask
 from db import db
-from routes.produto_routes import produto_bp
-from routes.categoria_routes import categoria_bp
 from dotenv import load_dotenv
 import os
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt
+
 load_dotenv()
 
-
-
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 # Configurações do banco de dados usando PyMySQL como driver
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 
 db.init_app(app)
 
-# Registrando os blueprints
-app.register_blueprint(produto_bp)
-app.register_blueprint(categoria_bp)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
 
-# Rota de teste
-@app.route('/api')
-def home():
-    return "Hello, Flask with MySQL!"
+def create_app():
+    from routes.usuario_routes import usuario_bp
+    from routes.produto_routes import produto_bp
+    from routes.categoria_routes import categoria_bp
 
+    # Registrando os blueprints
+    app.register_blueprint(usuario_bp, url_prefix='/usuarios')
+    app.register_blueprint(categoria_bp, url_prefix='/categorias')
+    app.register_blueprint(produto_bp, url_prefix='/produtos')
+
+    # Rota de teste
+    @app.route('/api')
+    def home():
+        return "Hello, Flask with MySQL!"
+
+    return app
 
 if __name__ == '__main__':
+    app = create_app()
     with app.app_context():
-        db.create_all()  # Create tables if they don't exist
+        db.create_all()
+    
     app.run(debug=True)
