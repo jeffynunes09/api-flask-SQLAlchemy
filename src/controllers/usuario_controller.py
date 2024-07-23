@@ -6,7 +6,7 @@ from app import bcrypt
 from db import db
 from flask_jwt_extended import JWTManager
 
-
+#CRIAÇÃO DE USUARIO
 class UsuarioController(MethodView):
     def post(self):
         data = request.get_json()
@@ -16,9 +16,9 @@ class UsuarioController(MethodView):
 
         if not name or not email or not password:
             return jsonify({"error": "Missing required fields"}), 400
-
+        #CRYPTOGRAFIA DE SENHA
         hashed_password = bcrypt.generate_password_hash(password,10).decode('utf-8')
-
+        #MANDANDO DADOS PARA O BANCO
         new_usuario = Usuario(name=name, email=email, password=hashed_password)
         db.session.add(new_usuario)
         db.session.commit()

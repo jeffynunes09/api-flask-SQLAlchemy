@@ -1,5 +1,4 @@
 from flask import Blueprint
-
 from controllers.usuario_controller import UsuarioController
 
 
