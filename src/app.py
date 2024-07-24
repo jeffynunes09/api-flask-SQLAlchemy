@@ -26,13 +26,19 @@ jwt = JWTManager(app)
 
 #FUNCTION PARA INICIAR ROTAS ANTES DE CHAMA-LAS
 def create_app():
+    from routes.usuario_routes import auth_bp
     from routes.usuario_routes import usuario_bp
     from routes.produto_routes import produto_bp
     from routes.categoria_routes import categoria_bp
+   
 
     # Registrando os blueprints
+   
     app.register_blueprint(usuario_bp, url_prefix='/usuarios')
     app.register_blueprint(categoria_bp, url_prefix='/categorias')
+    app.register_blueprint(auth_bp,url_prefix='/')
+
+    
     app.register_blueprint(produto_bp, url_prefix='/')
 
     # Rota de teste

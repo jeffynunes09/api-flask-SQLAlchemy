@@ -1,17 +1,19 @@
 from flask import request, jsonify
 from flask.views import MethodView
+from flask_jwt_extended import jwt_required
 from models.categoria import Categoria
+
 from db import db
 
-
-#CONTROLLER DE CATEGORIAS
 class CategoriaController(MethodView):
+
+    @jwt_required()
     
-    #CRIAR NOVA CATEGORIA
     def post(self):
         data = request.get_json()
         name = data.get('name')
         description = data.get('description')
+
         if not name or not description:
             return jsonify({"error": "Missing required fields"}), 400
 

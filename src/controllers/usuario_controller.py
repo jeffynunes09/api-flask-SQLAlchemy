@@ -27,7 +27,7 @@ class UsuarioController(MethodView):
     
 
 
-
+#CONTROLLER DE LOGIN 
 class LoginController(MethodView):
     def post(self):
         data = request.get_json()
