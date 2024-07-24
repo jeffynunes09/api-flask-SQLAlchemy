@@ -2,8 +2,8 @@
 from flask import request, jsonify
 from flask.views import MethodView
 from models.usuario import Usuario
-from app import bcrypt,jwt
-from db import db
+from app import bcrypt
+from database.db import db
 from flask_jwt_extended import create_access_token
 
 

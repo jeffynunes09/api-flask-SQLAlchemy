@@ -1,7 +1,7 @@
 
 #IMPORTES NECESSARIOS
 from flask import Flask
-from db import db
+from database.db import db
 from dotenv import load_dotenv
 import os
 from flask_cors import CORS
@@ -36,7 +36,7 @@ def create_app():
    
     app.register_blueprint(usuario_bp, url_prefix='/usuarios')
     app.register_blueprint(categoria_bp, url_prefix='/categorias')
-    app.register_blueprint(auth_bp,url_prefix='/')
+    app.register_blueprint(auth_bp,url_prefix='/produtos')
 
     
     app.register_blueprint(produto_bp, url_prefix='/')

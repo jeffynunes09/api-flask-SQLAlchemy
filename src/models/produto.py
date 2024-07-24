@@ -1,4 +1,4 @@
-from db import db
+from database.db import db
 
 class Produto(db.Model):
     __tablename__ = 'produtos'

@@ -1,6 +1,6 @@
 from flask import Blueprint
 from controllers.usuario_controller import *
-from middlewares.auth_middleware import auth_middleware
+
 
 
 #CRIANDO ROTAS DE USUARIO

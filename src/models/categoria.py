@@ -1,4 +1,4 @@
-from db import db
+from database.db import db
 #MODEL DE CATEGORIA
 class Categoria(db.Model):
     __tablename__ = 'category'

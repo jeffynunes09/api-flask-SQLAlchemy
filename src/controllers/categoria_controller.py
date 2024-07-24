@@ -3,7 +3,7 @@ from flask.views import MethodView
 from flask_jwt_extended import jwt_required
 from models.categoria import Categoria
 
-from db import db
+from database.db import db
 
 class CategoriaController(MethodView):
 

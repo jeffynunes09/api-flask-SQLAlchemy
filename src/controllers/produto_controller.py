@@ -2,11 +2,10 @@ from flask import request, jsonify
 from flask.views import MethodView
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.produto import Produto
-from db import db
+from database.db import db
 
 class ProdutoController(MethodView):
 
-    @jwt_required()
     
     def get(self):
         try:
